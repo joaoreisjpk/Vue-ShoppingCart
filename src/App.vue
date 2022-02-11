@@ -14,7 +14,7 @@
     </nav>
       <div @click="toggleSidebar" class="top-bar-cart-link">
         <i class="icofont-cart-alt icofont-1x"></i>
-        <span>Cart ({{ (cart.Raddishes || 0) + (cart.Artichokes || 0) + (cart.Broccoli || 0) }})</span>
+        <span>Cart ({{totalQuantity}})</span>
       </div>
   </header>
   <router-view :inventory="inventory" :addToCart="addToCart" />

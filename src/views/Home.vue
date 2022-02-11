@@ -11,11 +11,10 @@
 
         <div class="recommended">
           <ProductCard
-            v-for="(product, i) in inventory.slice(0,3)"
+            v-for="(product) in inventory.slice(0,3)"
             class="card"
             :key="product.id"
             :product="product"
-            :i="i"
             :addToCart="addToCart"
           />
         </div>
