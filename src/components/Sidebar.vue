@@ -18,26 +18,27 @@
               <th>Price</th>
               <th>Qty</th>
               <th>Total</th>
-              <th><span class="sr-only">Actions</span></th>
+              <th>
+                <span class="sr-only">Actions</span>
+              </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-for="(quantity, key, i) in cart" :key="i">
               <td><i class="icofont-carrot icofont-3x"></i></td>
-              <td>Carrot</td>
-              <td>$4.82</td>
-              <td class="center">{{ cart.carrots }}</td>
-              <td>\${{ cartTotal }}</td>
+              <td>{{ key }}</td>
+              <td>${{ getPrice(key) }}</td>
+              <td class="center">{{ quantity }}</td>
+              <td>${{ quantity * getPrice(key) }}</td>
               <td class="center">
-                <button class="btn btn-light cart-remove">&times;</button>
+                <button class="btn btn-light cart-remove" @click="remove(key)">&times;</button>
               </td>
             </tr>
           </tbody>
         </table>
-
-        <p class="center"><em>No items in cart</em></p>
+        <p class="center" v-if="!Object.keys(cart).length"><em>No items in cart</em></p>
         <div class="spread">
-          <span><strong>Total:</strong> \${{ cartTotal }}</span>
+          <span><strong>Total:</strong>${{ calculateTotal() }}</span>
           <button class="btn btn-light">Checkout</button>
         </div>
       </div>
@@ -47,9 +48,24 @@
 
 <script>
 export default {
-};
+  props: ['toggle', 'cart', 'inventory', 'remove'],
+  methods: {
+    getPrice (name) {
+      const product = this.inventory.find((p) => {
+        return p.name === name
+      })
+      return product.price.USD
+    },
+    calculateTotal () {
+      const total = Object.entries(this.cart).reduce((acc, curr, index) => {
+        return acc + (curr[1] * this.getPrice(curr[0]))
+      }, 0)
+      return total.toFixed(2)
+    }
+  }
+}
+
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
