@@ -31,7 +31,7 @@ export default {
   },
   data () {
     return {
-      showSidebar: true,
+      showSidebar: false,
       inventory: food,
       cart: {}
     }
