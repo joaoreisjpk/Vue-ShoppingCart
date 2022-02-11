@@ -44,12 +44,9 @@ export default {
     }
   },
   methods: {
-    addToCart (name, index) {
-      console.log(name, index, this.inventory)
+    addToCart (name, quantity) {
       if (!this.cart[name]) this.cart[name] = 0
-      this.cart[name] += this.inventory[index].quantity
-      console.log(this.cart[name], name)
-      this.inventory[index].quantity = 0
+      this.cart[name] += quantity
     },
     toggleSidebar () {
       this.showSidebar = !this.showSidebar
@@ -60,3 +57,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  body {
+    margin: 0;
+  }
+</style>
