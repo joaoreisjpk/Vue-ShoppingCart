@@ -11,7 +11,7 @@
 
         <div class="recommended">
 
-          <div v-for="product in inventory.slice(0,3)" :key="product.id" class="card">
+          <div v-for="(product, i) in inventory.slice(0,3)" :key="product.id" class="card">
             <div class="card-title">{{ product.name }}</div>
             <div class="card-body">
               <i class="icofont-10x icofont-{{ product.icon }}"></i>
@@ -41,7 +41,7 @@
               </form>
             </div>
             <div class="card-footer">
-              <button class="btn btn-light" @click="addToCart(product.name)">
+              <button class="btn btn-light" @click="addToCart(product.name, i)">
                 Add to cart
               </button>
             </div>
@@ -54,15 +54,10 @@
 </template>
 
 <script>
-import food from '../food.json'
 
 export default {
   name: 'Home',
-  data () {
-    return {
-      inventory: food
-    }
-  },
+  props: ['inventory', 'addToCart'],
   components: {}
 }
 </script>
